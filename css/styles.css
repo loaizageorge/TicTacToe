@@ -1,0 +1,30 @@
+.contain-all{
+    width:100%;
+    max-width: 1000px;
+    text-align: center;
+}
+
+.grid{
+  
+}
+
+h1{
+    display: inline-block;
+}
+
+.square{
+    background-color: ;
+    border: 4px black solid;
+    width: 200px;
+    height: 200px;
+}
+
+.putX{
+    background-image: url(/images/x.png);
+    background-size: contain;
+}
+
+.putO{
+    background-image: url(/images/y.png);
+    background-size: contain;
+}
