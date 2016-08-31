@@ -3,6 +3,8 @@ $(document).ready(function () {
     var winningPosition = [["1","2","3"],["4","5","6"],["7","8","9"],["1","4","7"],["2","5","8"],["3","6","9"],["1","5","9"],["3","5","7"]];
     var playerPositions=[];
     var computerPositions=[];
+    var myTurn=true;
+    
     $(".square").click(function () {
         
         //Store id of clicked square to check if is empty,
@@ -22,18 +24,14 @@ function playerTurn(currentId) {
         e.classList.add("putX");
         removeFromOpenPositions(currentId);
         playerPositions.push(currentId);
-        checkForWin(winningPosition, playerPositions);
+        myTurn=true;
+        checkForWin(winningPosition,playerPositions,computerPositions,myTurn);
         
         
         var randomPosition = openPositions[Math.floor(Math.random()*openPositions.length)];
         
         if(randomPosition==undefined){
-            console.log(playerPositions);
-            console.log(computerPositions);
-            newGame();
-            
-            
-            
+            newGame();   
         }
         else{
         var randomIndex= openPositions.indexOf(randomPosition);
@@ -45,9 +43,20 @@ function playerTurn(currentId) {
     }
 };
 
-function checkForWin(winningPosition,playerPositions){
+function checkForWin(winningPosition,playerPositions,computerPositions,myTurn){
+    var checkArray=[];
+    
+    if(myTurn){
+        checkArray=playerPositions; 
+        console.log("Player");
+        
+    }else{
+        checkArray=computerPositions;  
+        console.log("Comp");
+    }
+    
     for(var j=0;j<winningPosition.length;j++){
-        arrayContainsAnotherArray(winningPosition[j],playerPositions);
+        arrayContainsAnotherArray(winningPosition[j],checkArray);
     }
     
 };    
@@ -55,13 +64,18 @@ function checkForWin(winningPosition,playerPositions){
 function arrayContainsAnotherArray(needle, haystack){
   for(var i = 0; i < needle.length; i++){
     if(haystack.indexOf(needle[i]) === -1){
-        console.log("false");
+        
        return false;
     }
   }
-      console.log("true");
-    newGame();
-    return true;
+    if(myTurn){
+        alert("You Win!");
+        newGame();
+    }else{
+        alert("Computer Wins!");
+        newGame();
+    }
+    
       
     
   
@@ -75,7 +89,11 @@ function arrayContainsAnotherArray(needle, haystack){
 function computerTurn(gridPosition) {
     var e = document.getElementById(gridPosition);
     e.classList.add("putO");
+    myTurn=false;
+    checkForWin(winningPosition,playerPositions,computerPositions,myTurn);
+    console.log("Checked Comp")
     removeFromOpenPositions(gridPosition);
+    
 };
     
 function removeFromOpenPositions(positionId){
@@ -124,4 +142,3 @@ function resetBoard(){
 
 
 });
-
