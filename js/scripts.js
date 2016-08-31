@@ -4,6 +4,7 @@ $(document).ready(function () {
     var playerPositions=[];
     var computerPositions=[];
     var myTurn=true;
+    var gameOver=false;
     
     $(".square").click(function () {
         
@@ -26,7 +27,7 @@ function playerTurn(currentId) {
         playerPositions.push(currentId);
         myTurn=true;
         checkForWin(winningPosition,playerPositions,computerPositions,myTurn);
-        
+        if(gameOver==false){
         
         var randomPosition = openPositions[Math.floor(Math.random()*openPositions.length)];
         
@@ -41,6 +42,9 @@ function playerTurn(currentId) {
         
        
     }
+       gameOver=false; 
+    }
+    
 };
 
 function checkForWin(winningPosition,playerPositions,computerPositions,myTurn){
@@ -48,11 +52,11 @@ function checkForWin(winningPosition,playerPositions,computerPositions,myTurn){
     
     if(myTurn){
         checkArray=playerPositions; 
-        console.log("Player");
+       
         
     }else{
         checkArray=computerPositions;  
-        console.log("Comp");
+        
     }
     
     for(var j=0;j<winningPosition.length;j++){
@@ -69,11 +73,13 @@ function arrayContainsAnotherArray(needle, haystack){
     }
   }
     if(myTurn){
-        alert("You Win!");
+         $("#gameStatus").html("You Win!");
         newGame();
+        gameOver=true;
     }else{
-        alert("Computer Wins!");
+         $("#gameStatus").html("Computer Wins!");
         newGame();
+        gameOver=true;
     }
     
       
@@ -91,7 +97,7 @@ function computerTurn(gridPosition) {
     e.classList.add("putO");
     myTurn=false;
     checkForWin(winningPosition,playerPositions,computerPositions,myTurn);
-    console.log("Checked Comp")
+   
     removeFromOpenPositions(gridPosition);
     
 };
@@ -111,17 +117,15 @@ function GridIsFull(){
 };   
 
 function newGame(){
-    alert("you Win");
-        
-        
-    $("#gameStatus").html("Game Over!");
+            
+    
     setTimeout(function() {
         resetBoard();
     }, 1000);
-   
 };
 
 function resetBoard(){
+    
     openPositions = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
     playerPositions=[];
     computerPositions=[];
@@ -136,7 +140,7 @@ function resetBoard(){
         }
          $("#gameStatus").html("");
     }
-    
+  
 };    
 
 
