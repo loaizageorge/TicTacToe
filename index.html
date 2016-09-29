@@ -7,6 +7,34 @@
     <link rel="stylesheet" href="css/styles.css"> </head>
 
 <body>
+    
+    <div class = "container-fluid">
+        
+        <h1>Tic Tac Toe</h1>
+    
+    <div id="board">
+    
+        <table>
+      <tr id="row1">
+        <td id="1" class="square"></td>
+        <td id="2" class="vertical square"></td>
+        <td id="3" class="square"></td>
+      </tr>
+      <tr id="row2">
+        <td id="4" class="horizontal square"></td>
+        <td id="5" class="vertical horizontal square"></td>
+        <td id="6" class="horizontal square"></td>
+      </tr>
+      <tr id="row3">
+        <td id="7" class="square"></td>
+        <td id="8" class="vertical square"></td>
+        <td id="9" class="square"></td>
+      </tr>
+    </table>
+        
+    </div>
+    </div>
+    <!--
     <div class="container-fluid contain-all">
         <h1>Tic-Tac-Toe</h1>
         <h2 id="gameStatus"></h2>
@@ -38,9 +66,55 @@
                 </div>
             
         </div>
-    </div>
+    </div> -->
     <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
     <script src="js/scripts.js"></script>
 </body>
 
 </html>
+
+<!--
+<style type="text/css">
+        
+        td{
+            width: 100px;
+            height:100px;
+           
+        }
+        
+        .vertical{
+            border-left:1px solid black;
+            border-right: 1px solid black;
+        }
+        
+        .horizontal{
+            border-top: 1px solid black;
+            border-bottom: 1px solid black;
+        }
+        
+    </style>
+    
+</head>
+<body>
+    <table>
+        
+      <tr>
+        <td></td>
+        <td class="vertical"></td>
+        <td></td>  
+      </tr>
+        
+      <tr>
+        <td class="horizontal"></td>
+        <td class="vertical horizontal"></td>
+        <td class="horizontal"></td>  
+      </tr>
+        
+      <tr>
+        <td></td>
+        <td class="vertical"></td>
+        <td></td>  
+      </tr>    
+        
+    </table>
+-->

@@ -11,6 +11,7 @@ $(document).ready(function () {
         //Store id of clicked square to check if is empty,
         //and based on whose turn it is X or Y class is added.
         var currentId = $(this).attr('id');
+        
         playerTurn(currentId);
     });
     
