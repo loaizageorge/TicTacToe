@@ -23,12 +23,12 @@ function playerTurn(currentId) {
         return false;
     }
     else {
-        e.classList.add("putX");
-        removeFromOpenPositions(currentId);
-        playerPositions.push(currentId);
-        myTurn=true;
-        checkForWin(winningPosition,playerPositions,computerPositions,myTurn);
+        // makePlayerMove
+        makePlayerMove(e,currentId);
         if(gameOver==false){
+            
+        // Choose random square for computer 
+        //console.log(openPositions);    
         
         var randomPosition = openPositions[Math.floor(Math.random()*openPositions.length)];
         
@@ -47,6 +47,15 @@ function playerTurn(currentId) {
     }
     
 };
+    
+function makePlayerMove(e,id){
+        e.classList.add("putX");
+        removeFromOpenPositions(id);
+        playerPositions.push(id);
+        myTurn=true;
+        checkForWin(winningPosition,playerPositions,computerPositions,myTurn);
+    
+}    
 
 function checkForWin(winningPosition,playerPositions,computerPositions,myTurn){
     var checkArray=[];
@@ -82,14 +91,6 @@ function arrayContainsAnotherArray(needle, haystack){
         newGame();
         gameOver=true;
     }
-    
-      
-    
-  
-   
-
-   
-    
 };
     
 
@@ -142,6 +143,52 @@ function resetBoard(){
          $("#gameStatus").html("");
     }
   
+};
+
+function AI(){
+    // Copy array of openPositions so as to not alter the original while testing it
+    var possibleMoves = openPositions;
+    // Randomly pick an open square from array of possible moves, remove it from the array, and add it to a copy of currentPositions array
+    // Test this array for a winning play
+    while(possibleMoves.length!=0){
+        var testMove = computerPositions;
+        var randomPosition = possibleMoves[Math.floor(Math.random()*openPositions.length)];
+        var randomIndex= possibleMoves.indexOf(randomPosition);
+        testMove.push(openPositions[randomIndex]);
+        possibleMoves.splice(randomIndex,1);
+        console.log(testForWin);
+        
+        
+    }
+};
+    
+function testForWin(arrayToTest){
+    
+    for(var j=0;j<winningPosition.length;j++){
+        winLogic(winningPosition[j],arrayToTest);
+        
+        for(var i = 0; i<winningPosition[j].length; i++){
+            if(arrayToTest.indexOf(winningPosition[j][i]) === -1){
+                return false;
+            } else{
+                return true;
+            }
+        }
+    }
+    
+};
+
+function winLogic(needle, haystack){
+  for(var i = 0; i < needle.length; i++){
+    if(haystack.indexOf(needle[i]) === -1){
+        
+       return false;
+    } else{
+        //save winning move
+        return true;
+    }
+  }
+   
 };    
 
 
