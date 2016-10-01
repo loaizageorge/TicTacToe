@@ -6,14 +6,15 @@
 
 table{
     margin: 0 auto;
-    width: 400px;
+    width: 600px;
+    height: 600px;
 }
 
 
 
 td{
-    width: 100px;
-    height: 100px;
+    width: 200px;
+    height: 200px;
 }
 
 
@@ -50,14 +51,16 @@ h1{
 
 .putX{
     background-image: url(/images/x.png);
-    background-size: 100% 100%;
+    background-size: 70% 70%;
+    background-position: center;
     background-repeat: no-repeat;
     
 }
 
 .putO{
     background-image: url(/images/y.png);
-    background-size:100% 100%;
+    background-position: center;
+    background-size:70% 70%;
     background-repeat: no-repeat;
    
 }
