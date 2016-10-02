@@ -41,7 +41,7 @@ function playerTurn(currentId) {
 function randomComputerMove() {
     myTurn = false;
     var randomPosition = generateRandomMove();
-    var randomIndex = openPositions.indexOf(randomPosition);
+    var indexOfRandomPosition = openPositions.indexOf(randomPosition);
     makeAMove(randomPosition);
     checkForWin(computerPositions);
 }
@@ -127,7 +127,70 @@ function boardIsFull() {
     return false;
 };
 
+function AI(){
+    myTurn = false;
+    evaluate(computerPositions,true);
+}    
     
+function evaluate(array,compTurn) {
+  var possibleMoves = openPositions.slice(0);
+  var moveFound = false;
+  while (possibleMoves != 0) {
+    var moveToTest = [];
+    moveToTest = array.slice(0);
+    var randomPosition = possibleMoves[Math.floor(Math.random() * possibleMoves.length)];
+    var indexOfRandomPosition = possibleMoves.indexOf(randomPosition);
+    moveToTest.push(randomPosition);
+    possibleMoves.splice(indexOfRandomPosition, 1);
+
+    if (evaluateMove(moveToTest)) {
+      // break loop and make Move  
+      moveFound = true;
+      break;
+    }
+  }
+  if (moveFound) {
+    // make that move
+    console.log("Winning or blocking");
+    alert("Got em");
+    makeAMove(randomPosition);  
+  } else if (!moveFound && !compTurn) {
+      console.log("playing a random move");
+    // make random move
+      makeAMove(randomPosition);
+  } else if (!moveFound) {
+  console.log("checking for block");
+    evaluate(playerPositions, false);
+  }
+}
+
+function evaluateMove(moveToTest) {
+
+
+  for (var j = 0; j < winningPosition.length; j++) {
+    if (arrayContainsAnotherArrays(winningPosition[j], moveToTest)) {
+      //  console.log("Winning move: "+randomPosition);
+      return true;
+    }
+
+  }
+
+};
+
+function arrayContainsAnotherArrays(needle, haystack) {
+  for (var i = 0; i < needle.length; i++) {
+    if (haystack.indexOf(needle[i]) === -1) {
+      //   console.log("false");
+      return false;
+    }
+  }
+  //console.log(randomPosition);
+  // console.log("true");
+  // console.log(randomPosition);
+  return true;
+};    
+
+    /*
 function AI() {
 
     // Copy array of openPositions so as to not alter the original 
@@ -139,14 +202,14 @@ function AI() {
     // Test this array for a winning play
     while(possibleMoves!=0){
         
-        var testMove = computerPositions.slice(0);
+        var moveToTest = computerPositions.slice(0);
         
         // Use position to push to array, and index to remove from array
         var randomPosition = possibleMoves[Math.floor(Math.random() * possibleMoves.length)];
-        var randomIndex = possibleMoves.indexOf(randomPosition);
-        testMove.push(randomPosition);
-        possibleMoves.splice(randomIndex,1);
-        if(checkForWins(testMove,randomPosition)){
+        var indexOfRandomPosition = possibleMoves.indexOf(randomPosition);
+        moveToTest.push(randomPosition);
+        possibleMoves.splice(indexOfRandomPosition,1);
+        if(evaluateMove(moveToTest,randomPosition)){
         	// break loop and make Move  
           alert("Found em!");    
           makeAMove(randomPosition);
@@ -160,12 +223,12 @@ function AI() {
    }
      
 };
-
-function checkForWins(testMove,randomPosition){
+     
+function evaluateMove(moveToTest,randomPosition){
     
   	
     for(var j=0;j<winningPosition.length;j++){
-        if(arrayContainsAnotherArrays(winningPosition[j],testMove)){
+        if(arrayContainsAnotherArrays(winningPosition[j],moveToTest)){
       //  console.log("Winning move: "+randomPosition);
         return true;
         }
@@ -181,73 +244,8 @@ function arrayContainsAnotherArrays(needle, haystack){
        return false;
     } 
   }
-  //console.log(randomPosition);
- // console.log("true");
-  // console.log(randomPosition);
   return true;
 };   
-
-/*var openPositions = ["2","3", "6", "8", "9"];
-var winningPosition = [
-    ["1", "2", "3"],
-    ["4", "5", "6"],
-    ["7", "8", "9"],
-    ["1", "4", "7"],
-    ["2", "5", "8"],
-    ["3", "6", "9"],
-    ["1", "5", "9"],
-    ["3", "5", "7"]
-];
-
-var computerPositions = ["4","5","7"];
-
-AI();
-
-function AI() {
-
-    // Copy array of openPositions so as to not alter the original 
-    //while testing it
-    var possibleMoves = openPositions;
-    // Randomly pick an open square from array of possible moves, remove it from the array, and add it to a copy of currentPositions array
-    // Test this array for a winning play
-    while(possibleMoves!=0){
-
-        var testMove = computerPositions.slice(0);
-        var randomPosition = possibleMoves[Math.floor(Math.random() * possibleMoves.length)];
-        var randomIndex = possibleMoves.indexOf(randomPosition);
-        testMove.push(possibleMoves[randomIndex]);
-        possibleMoves.splice(randomIndex,1);
-        checkForWin(testMove,randomPosition);
-       // console.log(testMove);
-
-   }   
-
-};
-
-function checkForWin(testMove,randomPosition){
-
-
-    for(var j=0;j<winningPosition.length;j++){
-        if(arrayContainsAnotherArray(winningPosition[j],testMove,randomPosition)){
-        console.log("Winning move: "+randomPosition);
-        console.log(true);
-        }
-        console.log(false);
-    }
-
-};    
-
-function arrayContainsAnotherArray(needle, haystack,randomPosition){
-  for(var i = 0; i < needle.length; i++){
-    if(haystack.indexOf(needle[i]) === -1){
-     //   console.log("false");
-       return false;
-    } 
-  }
-  //console.log(randomPosition);
- // console.log("true");
-  // console.log(randomPosition);
-  return true;
-};
 */
+
 });
