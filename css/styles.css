@@ -4,17 +4,28 @@
 	box-sizing: border-box;
 }
 
-table{
-    margin: 0 auto;
-    width: 600px;
-    height: 600px;
+body{
+    text-align: center;
+    font-family: 'Fredericka the Great', cursive; 
+}
+
+h1{
+    text-align: center;
+    margin-top: 50px;
+}
+
+.square{
+    width: 33%;
+    height: 100px;
+    
 }
 
 
 
-td{
-    width: 200px;
-    height: 200px;
+#gameBoard{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
@@ -27,32 +38,6 @@ td{
     border-top: 1px solid black;
     border-bottom: 1px solid black;
 }
-
-.contain-all{
-    width:100%;
-    max-width: 1000px;
-    text-align: center;
-}
-
-#board{
-  margin: 55px 0px;
-}
-
-h1{
-    text-align: center;
-    margin-top: 50px;
-}
-
-h3{
-    text-align: center;
-    margin: 0;
-}
-
-/*.square{
-    width: 100px;
-    height: 100px;
-
-}*/
 
 .putX{
     background-image: url(/images/x.png);

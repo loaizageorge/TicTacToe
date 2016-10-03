@@ -23,7 +23,6 @@ function playerTurn(currentId) {
         makeAMove(currentId);
         if (gameOver == false) {
             // Choose random square for computer 
-            //console.log(openPositions);
             // check for open spaces, if none left, game resets
             // If there are, computers turn
             if (boardIsFull()) {
@@ -43,7 +42,7 @@ function randomComputerMove() {
     var randomPosition = generateRandomMove();
     var indexOfRandomPosition = openPositions.indexOf(randomPosition);
     makeAMove(randomPosition);
-    checkForWin(computerPositions);
+    winHandler(computerPositions);
 }
 
 function generateRandomMove() {
@@ -66,21 +65,21 @@ function makeAMove(id) {
         e.classList.add("putO");
     }
     removeFromOpenPositions(id);
-    checkForWin(checkArray);
+    winHandler(checkArray,false);
 }
 
-function checkForWin(checkArray) {
-    for (var j = 0; j < winningPosition.length; j++) {
-        arrayContainsAnotherArray(winningPosition[j], checkArray);
-    }
-};
-
-function arrayContainsAnotherArray(needle, haystack) {
-    for (var i = 0; i < needle.length; i++) {
-        if (haystack.indexOf(needle[i]) === -1) {
-            return false;
+function winHandler(checkArray,test){
+    //
+    if(checkForWin(checkArray)){
+        if(!test){
+            checkWhoWon(); 
+        }else{
+            return true;
         }
     }
+}    
+    
+function checkWhoWon(){
     if (myTurn) {
         $("#winner").html("You Win!");
         newGame();
@@ -91,6 +90,23 @@ function arrayContainsAnotherArray(needle, haystack) {
         newGame();
         gameOver = true;
     }
+}    
+    
+function checkForWin(checkArray) {
+    for (var j = 0; j < winningPosition.length; j++) {
+       if(arrayContainsAnotherArray(winningPosition[j], checkArray)){
+           return true;
+       }
+    }
+};
+
+function arrayContainsAnotherArray(needle, haystack) {
+    for (var i = 0; i < needle.length; i++) {
+        if (haystack.indexOf(needle[i]) === -1) {
+            return false;
+        }
+    }
+    return true;
 };
 
 function removeFromOpenPositions(positionId) {
@@ -143,54 +159,23 @@ function evaluate(array,compTurn) {
     moveToTest.push(randomPosition);
     possibleMoves.splice(indexOfRandomPosition, 1);
 
-    if (evaluateMove(moveToTest)) {
+    if (winHandler(moveToTest,true)) {
       // break loop and make Move  
       moveFound = true;
       break;
     }
   }
   if (moveFound) {
-    // make that move
-    console.log("Winning or blocking");
-    alert("Got em");
+    // make that move, will be either winning move or block
     makeAMove(randomPosition);
-    checkForWin(computerPositions);  
+    winHandler(computerPositions,false);  
   } else if (!moveFound && !compTurn) {
-      console.log("playing a random move");
-    // make random move
+    // make random move, only if no win or block found
       makeAMove(randomPosition);
   } else if (!moveFound) {
-  console.log("checking for block");
+      // Check for opponent win
     evaluate(playerPositions, false);
   }
-}
-
-function evaluateMove(moveToTest) {
-
-
-  for (var j = 0; j < winningPosition.length; j++) {
-    if (arrayContainsAnotherArrays(winningPosition[j], moveToTest)) {
-      //  console.log("Winning move: "+randomPosition);
-      return true;
-    }
-
-  }
-
-};
-
-function arrayContainsAnotherArrays(needle, haystack) {
-  for (var i = 0; i < needle.length; i++) {
-    if (haystack.indexOf(needle[i]) === -1) {
-      //   console.log("false");
-      return false;
-    }
-  }
-  //console.log(randomPosition);
-  // console.log("true");
-  // console.log(randomPosition);
-  return true;
-};    
-
-  
+}  
 
 });
