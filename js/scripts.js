@@ -82,12 +82,12 @@ function arrayContainsAnotherArray(needle, haystack) {
         }
     }
     if (myTurn) {
-        $("#gameStatus").html("You Win!");
+        $("#winner").html("You Win!");
         newGame();
         gameOver = true;
     }
     else {
-        $("#gameStatus").html("Computer Wins!");
+        $("#winner").html("Computer Wins!");
         newGame();
         gameOver = true;
     }
@@ -116,7 +116,7 @@ function resetBoard() {
         else {
             e.classList.remove("putO");
         }
-        $("#gameStatus").html("");
+        $("#winner").html("");
     }
 };
 
@@ -153,7 +153,8 @@ function evaluate(array,compTurn) {
     // make that move
     console.log("Winning or blocking");
     alert("Got em");
-    makeAMove(randomPosition);  
+    makeAMove(randomPosition);
+    checkForWin(computerPositions);  
   } else if (!moveFound && !compTurn) {
       console.log("playing a random move");
     // make random move
@@ -190,62 +191,6 @@ function arrayContainsAnotherArrays(needle, haystack) {
   return true;
 };    
 
-    /*
-function AI() {
-
-    // Copy array of openPositions so as to not alter the original 
-    //while testing it
-    var possibleMoves = openPositions.slice(0);
-    myTurn = false;
-    var foundMove = false;
-    // Randomly pick an open square from array of possible moves, remove it from the array, and add it to a copy of currentPositions array
-    // Test this array for a winning play
-    while(possibleMoves!=0){
-        
-        var moveToTest = computerPositions.slice(0);
-        
-        // Use position to push to array, and index to remove from array
-        var randomPosition = possibleMoves[Math.floor(Math.random() * possibleMoves.length)];
-        var indexOfRandomPosition = possibleMoves.indexOf(randomPosition);
-        moveToTest.push(randomPosition);
-        possibleMoves.splice(indexOfRandomPosition,1);
-        if(evaluateMove(moveToTest,randomPosition)){
-        	// break loop and make Move  
-          alert("Found em!");    
-          makeAMove(randomPosition);
-          foundMove = true;
-          break;
-        }        
-   }
-   if(!foundMove){
-       
-   	   makeAMove(randomPosition);
-   }
-     
-};
-     
-function evaluateMove(moveToTest,randomPosition){
-    
-  	
-    for(var j=0;j<winningPosition.length;j++){
-        if(arrayContainsAnotherArrays(winningPosition[j],moveToTest)){
-      //  console.log("Winning move: "+randomPosition);
-        return true;
-        }
-        
-    }
-    
-};    
-
-function arrayContainsAnotherArrays(needle, haystack){
-  for(var i = 0; i < needle.length; i++){
-    if(haystack.indexOf(needle[i]) === -1){
-     //   console.log("false");
-       return false;
-    } 
-  }
-  return true;
-};   
-*/
+  
 
 });
