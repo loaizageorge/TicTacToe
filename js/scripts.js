@@ -5,6 +5,9 @@ $(document).ready(function () {
     var computerPositions = [];
     var myTurn = true;
     var gameOver = false;
+    
+    $('#myModal').modal('show');
+    
     $(".square").click(function () {
         //Store id of clicked square to check if is empty,
         //and based on whose turn it is X or Y class is added.
@@ -143,10 +146,14 @@ $(document).ready(function () {
         }
         return false;
     };
-    // AI LOGIC   
+    /********************** AI LOGIC ******************************/  
     function AI() {
         myTurn = false;
+        if(checkMiddle()){
+           makeAMove("5");
+        }else{
         evaluatePossibleMoves(computerPositions, true);
+        }
     }
 
     function evaluatePossibleMoves(array, compTurn) {
@@ -178,5 +185,9 @@ $(document).ready(function () {
             // Check for opponent win
             evaluatePossibleMoves(playerPositions, false);
         }
-    }
+    };
+    
+    function checkMiddle(){
+      return openPositions.includes("5");
+    };
 });

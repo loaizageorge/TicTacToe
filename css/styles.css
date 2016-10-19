@@ -14,29 +14,33 @@ h1{
     margin-top: 50px;
 }
 
+.wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15%;
+    margin-bottom: 15%;
+}
+
+#gameBoard{
+   height: 60%;
+   flex-shrink: 5;
+}
+
 .square{
     width: 33%;
     height: 100px;
     
 }
 
-
-
-#gameBoard{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-
 .vertical{
-    border-left:1px solid black;
-    border-right: 1px solid black;
+    border-left:2px solid black;
+    border-right: 2px solid black;
 }
 
 .horizontal{
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
 }
 
 .putX{
@@ -53,4 +57,20 @@ h1{
     background-size:70% 70%;
     background-repeat: no-repeat;
    
+}
+
+.resize{
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+}
+
+.modal-content{
+    background: #6aa585;
+}
+
+.modal-content h2,
+.modal-content h3{
+    text-rendering: optimizeLegibility;
+    color: white;
 }
