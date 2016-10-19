@@ -23,7 +23,7 @@ h1{
 
 #gameBoard{
     width: 300px;
-    margin: 15% auto;
+    margin: 10% auto;
      
 }
 
@@ -48,9 +48,6 @@ h1{
     background-size: 70% 70%;
     background-position: center;
     background-repeat: no-repeat;
-    margin: 0;
-    padding: none;
-    
 }
 
 .putO{

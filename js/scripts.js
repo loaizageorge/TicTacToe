@@ -6,11 +6,15 @@ $(document).ready(function () {
     var myTurn = true;
     var gameOver = false;
     
+    var computerShape;
+    var playerShape;
+    
     $('#myModal').modal('show');
     
     $(".choose-side").click(function(){
-        alert('Symbol picked');
-    })
+        var currentId = $(this).attr('id');
+        setSymbol(currentId);
+    });
     
     $(".square").click(function () {
         //Store id of clicked square to check if is empty,
@@ -57,12 +61,12 @@ $(document).ready(function () {
         if (myTurn) {
             playerPositions.push(id);
             checkArray = playerPositions.slice(0);
-            e.classList.add("putX");
+            e.classList.add(playerShape);
         }
         else {
             computerPositions.push(id);
             checkArray = playerPositions.slice(0);
-            e.classList.add("putO");
+            e.classList.add(computerShape);
         }
         openPositions.splice(openPositions.indexOf(id), 1);
         checkForWin(checkArray, false);
@@ -151,6 +155,17 @@ $(document).ready(function () {
         }
         return false;
     };
+    
+    function setSymbol(id){
+     if(id == 'X'){
+         playerShape = 'putX';
+         computerShape = 'putO';
+     } else{
+         playerShape = 'putO';
+         computerShape = 'putX';
+     }   
+    }
+    
     /********************** AI LOGIC ******************************/  
     function AI() {
         myTurn = false;
