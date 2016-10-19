@@ -8,6 +8,10 @@ $(document).ready(function () {
     
     $('#myModal').modal('show');
     
+    $(".choose-side").click(function(){
+        alert('Symbol picked');
+    })
+    
     $(".square").click(function () {
         //Store id of clicked square to check if is empty,
         //and based on whose turn it is X or Y class is added.
@@ -25,6 +29,7 @@ $(document).ready(function () {
             // makePlayerMove
             makeAMove(currentId);
             if (gameOver == false) {
+                
                 // Choose random square for computer 
                 // check for open spaces, if none left, game resets
                 // If there are, computers turn
