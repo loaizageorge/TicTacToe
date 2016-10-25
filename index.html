@@ -5,19 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/styles.css"> 
-    <link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cabin+Sketch" rel="stylesheet">
     </head>
 
 <body>
     <div class="container">
+       <div class="texture">
         <div class="row">
             <div class="col-xs-12">
                 <h1>Tic Tac Toe </h1>
-                <div class="wrapper">
                 <h2 id="winner"></h2>
                 <div id="gameBoard">
                     <div class="row">
-                        
                         <div id="1" class="col-xs-4 square"></div>
                         <div id="2" class="col-xs-4 vertical square"></div>
                         <div id="3" class="col-xs-4 square"></div>
@@ -28,27 +27,27 @@
                         <div id="8" class="col-xs-4 vertical square"></div>
                         <div id="9" class="col-xs-4 square"></div>
                     </div>
-                </div>  
-            </div>   
+                </div>
+                <a href="#" id = "changeSide"><h3>Change sides</h3></a>  
         </div>
     </div>
-        
+        </div>
         <!--------MODAL -------->
         <div class="modal fade" id="myModal" tabindex = "-1" role = "dialog" aria-labelledby= "myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h2 class="modal-title" id="myModalLabel">Pick a side!</h2>
+                        <h2 class="modal-title" id="myModalLabel">Choose a side!</h2>
                     </div>
                     <div class="modal-body">
                 
                         <div class="row">
                             <div class="col-xs-6">
-                                <a href="#" id="chooseX" ><img class="resize img-responsive" src="images/x.png"></a>
+                                <a href="#" class="choose-side" id="X" data-dismiss="modal" ><img class="resize img-responsive" src="images/x.png"></a>
                             </div>
                             <div class="col-sm-6">
-                                <a href="#" id="choose0" class="put0"><img class="resize img-responsive" src="images/y.png"></a>
+                                <a href="#" id="0" class="choose-side" data-dismiss="modal"><img class="resize img-responsive" src="images/y.png"></a>
                             </div>
                             <h3>X goes first!</h3>
                         </div>

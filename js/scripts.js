@@ -6,7 +6,12 @@ $(document).ready(function () {
     var myTurn = true;
     var gameOver = false;
     
+    var computerShape;
+    var playerShape;
+    
     $('#myModal').modal('show');
+    
+   
     
     $(".square").click(function () {
         //Store id of clicked square to check if is empty,
@@ -25,6 +30,7 @@ $(document).ready(function () {
             // makePlayerMove
             makeAMove(currentId);
             if (gameOver == false) {
+                
                 // Choose random square for computer 
                 // check for open spaces, if none left, game resets
                 // If there are, computers turn
@@ -33,7 +39,9 @@ $(document).ready(function () {
                 }
                 else {
                     // computerTurn
-                    AI();
+                        AI();
+                  
+                    
                 }
             }
             gameOver = false;
@@ -52,15 +60,20 @@ $(document).ready(function () {
         if (myTurn) {
             playerPositions.push(id);
             checkArray = playerPositions.slice(0);
-            e.classList.add("putX");
+            e.classList.add(playerShape);
         }
         else {
             computerPositions.push(id);
             checkArray = playerPositions.slice(0);
-            e.classList.add("putO");
+            e.classList.add(computerShape);
         }
         openPositions.splice(openPositions.indexOf(id), 1);
+        console.log('Player Positions: ' + playerPositions);
+        console.log('Computer Positions: ' + computerPositions);
         checkForWin(checkArray, false);
+        if (boardIsFull()) {
+                    newGame();
+                }
     }
 
     function checkForWin(checkArray, test) {
@@ -113,19 +126,21 @@ $(document).ready(function () {
     function newGame() {
         setTimeout(function () {
             resetBoard();
-        }, 1000);
+        }, 800);
     };
 
     function resetBoard() {
         resetGameArrays();
         removeSymbolsFromBoard();
         $("#winner").html("");
+        startNewGame();
     };
 
     function resetGameArrays() {
         openPositions = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
         playerPositions = [];
         computerPositions = [];
+        
     }
 
     function removeSymbolsFromBoard() {
@@ -146,6 +161,41 @@ $(document).ready(function () {
         }
         return false;
     };
+    
+     $(".choose-side").click(function(){
+        var currentId = $(this).attr('id');
+        setSymbol(currentId);
+    });
+    
+    $("#changeSide").click(function(){
+        $("#myModal").modal("show");    
+       
+        
+    });
+    
+    function setSymbol(id){
+     if(id == 'X'){
+         playerShape = 'putX';
+         computerShape = 'putO';
+     } else{
+         playerShape = 'putO';
+         computerShape = 'putX';
+     }
+      newGame();   
+    }
+    
+    function startNewGame(){
+        if(computerShape == 'putX'){
+            myTurn = false;   
+            AI();
+                   
+       
+           
+        }
+    }
+    
+   
+    
     /********************** AI LOGIC ******************************/  
     function AI() {
         myTurn = false;
@@ -154,6 +204,7 @@ $(document).ready(function () {
         }else{
         evaluatePossibleMoves(computerPositions, true);
         }
+        myTurn = true;
     }
 
     function evaluatePossibleMoves(array, compTurn) {

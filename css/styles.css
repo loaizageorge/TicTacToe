@@ -6,25 +6,25 @@
 
 body{
     text-align: center;
-    font-family: 'Fredericka the Great', cursive; 
+    font-family: 'Cabin Sketch', cursive; 
+     background-image: url(/images/background.jpg);
+    background-position: cover;
+    background-repeat: no-repeat;
+    font-size: 16px;
+    
+    
 }
 
 h1{
     text-align: center;
     margin-top: 50px;
-}
-
-.wrapper{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 15%;
-    margin-bottom: 15%;
+    font-size: 3em;
 }
 
 #gameBoard{
-   height: 60%;
-   flex-shrink: 5;
+    width: 300px;
+    margin: 10% auto;
+     
 }
 
 .square{
@@ -48,7 +48,6 @@ h1{
     background-size: 70% 70%;
     background-position: center;
     background-repeat: no-repeat;
-    
 }
 
 .putO{
@@ -58,6 +57,7 @@ h1{
     background-repeat: no-repeat;
    
 }
+
 
 .resize{
     width: 100px;
